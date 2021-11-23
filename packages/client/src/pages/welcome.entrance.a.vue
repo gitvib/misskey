@@ -9,7 +9,7 @@
 		<div class="emojis">
 			<MkEmoji :normal="true" :no-style="true" emoji="👍"/>
 			<MkEmoji :normal="true" :no-style="true" emoji="❤"/>
-			<MkEmoji :normal="true" :no-style="true" emoji="😆"/>
+			<MkEmoji :normal="true" :no-style="true" emoji="🥴"/>
 			<MkEmoji :normal="true" :no-style="true" emoji="🎉"/>
 			<MkEmoji :normal="true" :no-style="true" emoji="🍮"/>
 		</div>
@@ -42,6 +42,16 @@
 					<I18n :src="$ts.onlineUsersCount" text-tag="span" class="online">
 						<template #n><b>{{ onlineUsersCount }}</b></template>
 					</I18n>
+				<!--I am preeeetty sure this is not how I am supposed to do this but it works... I'm lazy what can I say-->
+				</div>
+				<div class="status">
+					<div class="action">
+						<p>Here is a little page presenting what snug.moe has to offer, rules and other thingies:</p>
+						<MkButton gradate inline onclick="window.location.href='https://snug.moe/info'">Info</MkButton>
+					</div>
+					<p>but in sumary snug.moe hosts a Misskey instance (here), XMPP server and Matrix homeserver while trying to stay snug and comfy.</p>
+					<p>Enjoy your stay c:</p>
+					<MkButton inline onclick="window.location.href='https://element.snug.moe'">Matrix client</MkButton>
 				</div>
 				<button class="_button _acrylic menu" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
 			</div>
