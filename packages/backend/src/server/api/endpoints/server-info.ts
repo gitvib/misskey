@@ -29,8 +29,10 @@ export default define(meta, async () => {
 			total: memStats.total,
 		},
 		fs: {
-			total: fsStats[0].size,
-			used: fsStats[0].used,
+			//total: fsStats[0].size,
+			//used: fsStats[0].used,
+			total: 0,
+			used: 0,
 		},
 	};
 });
