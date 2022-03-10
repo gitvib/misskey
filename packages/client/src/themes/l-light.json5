@@ -1,8 +1,8 @@
 {
-	id: '36db26ef-bc30-452e-919f-f23bfa926cea',
+	id: '38e61c03-2475-4d69-8954-4b8f963c2480',
 	base: 'light',
-	desc: 'Cherry color light theme',
-	name: 'Cherry light',
+	desc: 'snug.moe light theme based on Cherry',
+	name: 'snug light',
 	props: {
 		bg: '#eceff4',
 		fg: '#33303E',

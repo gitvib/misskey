@@ -1,8 +1,8 @@
 {
-	id: '36db26ef-bc30-452e-919f-f23bfa926ceb',
+	id: '8094432e-34eb-47c1-b171-1319e56f7212',
 	base: 'dark',
-	desc: 'Cherry color theme',
-	name: 'Cherry',
+	desc: 'snug.moe dark theme based on Cherry',
+	name: 'snug dark',
 	props: {
 		bg: '#1c1c25',
 		fg: '#eceff4',
