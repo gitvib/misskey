@@ -47,9 +47,9 @@
 				<div class="status">
 					<div class="action">
 						<p>Here is a little page presenting what snug.moe has to offer, rules and other thingies:</p>
-						<MkButton gradate inline onclick="window.location.href='https://snug.moe/info'">Info</MkButton>
+						<MkButton gradate inline onclick="window.location.href='https://info.snug.moe'">Info</MkButton>
 					</div>
-					<p>but in sumary snug.moe hosts a Misskey instance (here), XMPP server and Matrix homeserver while trying to stay snug and comfy.</p>
+					<p>but in summary snug.moe hosts a Misskey instance (here), XMPP server and Matrix homeserver while trying to stay snug and comfy.</p>
 					<p>Enjoy your stay c:</p>
 					<MkButton inline onclick="window.location.href='https://element.snug.moe'">Matrix client</MkButton>
 				</div>
