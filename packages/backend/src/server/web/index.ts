@@ -4,6 +4,7 @@
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PathOrFileDescriptor, readFileSync } from 'node:fs';
 import ms from 'ms';
 import Koa from 'koa';
 import Router from '@koa/router';
@@ -14,7 +15,7 @@ import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter.js';
 import { KoaAdapter } from '@bull-board/koa';
 
-import { IsNull } from 'typeorm';
+import { In, IsNull } from 'typeorm';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import config from '@/config/index.js';
 import { Users, Notes, UserProfiles, Pages, Channels, Clips, GalleryPosts } from '@/models/index.js';
@@ -32,6 +33,7 @@ const _dirname = dirname(_filename);
 const staticAssets = `${_dirname}/../../../assets/`;
 const clientAssets = `${_dirname}/../../../../client/assets/`;
 const assets = `${_dirname}/../../../../../built/_client_dist_/`;
+const swAssets = `${_dirname}/../../../../../built/_sw_dist_/`;
 
 // Init app
 const app = new Koa();
@@ -72,6 +74,9 @@ app.use(views(_dirname + '/views', {
 	extension: 'pug',
 	options: {
 		version: config.version,
+		clientEntry: () => process.env.NODE_ENV === 'production' ?
+			config.clientEntry :
+			JSON.parse(readFileSync(`${_dirname}/../../../../../built/_client_dist_/manifest.json`, 'utf-8'))['src/init.ts'].file.replace(/^_client_dist_\//, ''),
 		config,
 	},
 }));
@@ -136,9 +141,10 @@ router.get('/twemoji/(.*)', async ctx => {
 });
 
 // ServiceWorker
-router.get('/sw.js', async ctx => {
-	await send(ctx as any, `/sw.${config.version}.js`, {
-		root: assets,
+router.get(`/sw.js`, async ctx => {
+	await send(ctx as any, `/sw.js`, {
+		root: swAssets,
+		maxage: ms('10 minutes'),
 	});
 });
 
@@ -266,7 +272,10 @@ router.get('/users/:user', async ctx => {
 
 // Note
 router.get('/notes/:note', async (ctx, next) => {
-	const note = await Notes.findOneBy({ id: ctx.params.note });
+	const note = await Notes.findOneBy({
+		id: ctx.params.note,
+		visibility: In(['public', 'home']),
+	});
 
 	if (note) {
 		const _note = await Notes.pack(note);
@@ -283,11 +292,7 @@ router.get('/notes/:note', async (ctx, next) => {
 			themeColor: meta.themeColor,
 		});
 
-		if (['public', 'home'].includes(note.visibility)) {
-			ctx.set('Cache-Control', 'public, max-age=180');
-		} else {
-			ctx.set('Cache-Control', 'private, max-age=0, must-revalidate');
-		}
+		ctx.set('Cache-Control', 'public, max-age=180');
 
 		return;
 	}

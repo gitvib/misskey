@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, watch, nextTick, onMounted } from 'vue';
+import { inject, watch, nextTick, onMounted, defineAsyncComponent } from 'vue';
 import * as mfm from 'mfm-js';
 import * as misskey from 'misskey-js';
 import insertTextAtCursor from 'insert-text-at-cursor';
@@ -87,6 +87,7 @@ import MkInfo from '@/components/ui/info.vue';
 import { i18n } from '@/i18n';
 import { instance } from '@/instance';
 import { $i, getAccounts, openAccountMenu as openAccountMenu_ } from '@/account';
+import { uploadFile } from '@/scripts/upload';
 
 const modal = inject('modal');
 
@@ -372,7 +373,7 @@ function updateFileName(file, name) {
 }
 
 function upload(file: File, name?: string) {
-	os.upload(file, defaultStore.state.uploadFolder, name).then(res => {
+	uploadFile(file, defaultStore.state.uploadFolder, name).then(res => {
 		files.push(res);
 	});
 }
@@ -383,7 +384,7 @@ function setVisibility() {
 		return;
 	}
 
-	os.popup(import('./visibility-picker.vue'), {
+	os.popup(defineAsyncComponent(() => import('./visibility-picker.vue')), {
 		currentVisibility: visibility,
 		currentLocalOnly: localOnly,
 		src: visibilityButton,
