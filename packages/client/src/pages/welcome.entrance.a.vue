@@ -51,7 +51,10 @@
 					</div>
 					<p>but in summary snug.moe hosts a Misskey instance (here), XMPP server and Matrix homeserver while trying to stay snug and comfy.</p>
 					<p>Enjoy your stay c:</p>
-					<MkButton inline onclick="window.location.href='https://element.snug.moe'">Matrix client</MkButton>
+					<div class="action">
+						<MkButton inline onclick="window.location.href='https://element.snug.moe'">Matrix client</MkButton>
+						<MkButton inline onclick="window.location.href='https://video.snug.moe'">Peertube</MkButton>
+					</div>
 				</div>
 				<button class="_button _acrylic menu" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
 			</div>
