@@ -28,9 +28,6 @@ same as 12.112.0
 
 ## 12.112.0 (2022/07/07)
 
-### Known issues
-- 現在arm64環境ではインストールに失敗します。これは次のバージョンで修正される予定です。
-
 ### Changes
 - ハイライトがみつけるに統合されました
 - カスタム絵文字ページはインスタンス情報ページに統合されました
@@ -42,7 +39,6 @@ same as 12.112.0
 
 ### Improvements
 - Server: Allow GET method for some endpoints @syuilo
-- Server: Auto NSFW detection @syuilo
 - Server: Add rate limit to i/notifications @tamaina
 - Client: Improve control panel @syuilo
 - Client: Show warning in control panel when there is an unresolved abuse report @syuilo
